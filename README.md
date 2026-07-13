@@ -54,8 +54,7 @@ builder-radar/
 ## 安装 / Install
 
 ```bash
-# 通过 SkillHub
-skillhub install builder-radar
+git clone https://github.com/Elisedai1013/builder-radar.git
 ```
 
 ---
@@ -80,4 +79,4 @@ skillhub install builder-radar
 
 ---
 
-*Made with ☕ by Elisedai · Published on [SkillHub](https://skillhub.cn)*
+*Made with ☕ by Elisedai*
