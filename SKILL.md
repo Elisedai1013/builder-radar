@@ -1,7 +1,7 @@
 ---
 slug: builder-radar
 displayName: Builder Radar — AI Builder 前沿信息每日雷达
-version: 3.2.0
+version: 3.2.1
 summary: 每日追踪 29 位 AI 产品 Builder 的 shipping 动态，三维打分（实时性×重要程度×火爆程度），输出结构化日报。聚焦产品发布、技术深度文、大会演讲，自动过滤观点噪音。
 license: MIT
 name: builder-radar
