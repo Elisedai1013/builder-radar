@@ -21,6 +21,28 @@ Treat discovery as a **multi-source, multi-frequency problem**. Select one mode 
 > Product launches > demos > research and engineering deep-dives > builder-written experiments > verified case studies > conference talks.
 > Opinions, predictions, hot takes, commentary — skip them. They don't give you information you can act on.
 
+## Builder qualification gate (MANDATORY — applied before source scoring)
+
+Do not equate "AI content creator" with "AI builder." Before an item enters the candidate pool, classify the source and verify that the speaker or author has direct proximity to the work.
+
+| Qualification | Evidence required | Editorial treatment |
+|---|---|---|
+| **Core builder** | Builds or leads the product, model, research system, or agent infrastructure being discussed | Eligible for Tier 1 |
+| **Production operator** | Runs the product in a real organization and provides workflow details, measurements, failures, or adoption evidence | Eligible for Tier 1 |
+| **First-party researcher** | Authored the research, evaluation, training method, safety system, or technical mechanism | Eligible for Tier 1 |
+| **Builder interviewer** | Interviews qualified builders and elicits concrete mechanisms or operating details | Eligible when the named guests and their claims are verified |
+| **Educator / commentator** | Explains tools but did not build, research, or operate the system and provides no original experiment | Normally skip or demote to Tier 3 |
+
+Apply all of these checks:
+
+1. **Identity:** verify the person's current role from a first-party profile, employer page, paper, repository, or event bio.
+2. **Proximity:** require direct involvement in the product or a documented production deployment. A large audience alone is not evidence.
+3. **Artifact:** require at least one shipped product, code/release, paper, reproducible experiment, production case study, or substantive first-party demo.
+4. **Topic match:** the artifact must directly address the requested capability. A broad Codex tutorial does not qualify as a deep source about pull-request review merely because it mentions GitHub.
+5. **Substance:** prefer mechanisms, numbers, failures, tradeoffs, and implementation decisions. Treat beginner walkthroughs and generic tool tours as discovery material only.
+
+Only core builders, production operators, first-party researchers, or verified builder interviews may enter Tier 1. Record `educator-only`, `role unverified`, or `topic mismatch` explicitly in Skipped when a popular source fails this gate.
+
 ## Source link priority (MANDATORY — checked BEFORE presenting)
 
 Every item in the digest MUST include links. When collecting links, follow this priority order:
@@ -121,6 +143,18 @@ Heat signals to collect (additive, cap at 10):
 - Cross-reference signal: same topic appears under multiple builder searches → proxies for cross-builder mentions
 - If available, WebFetch the original X post or blog to find engagement numbers in page metadata
 
+### Organic heat vs paid reach (MANDATORY)
+
+Treat raw reach and organic community heat as different signals. Before awarding YouTube or social heat points:
+
+1. Compare views with likes, comments, age, duration, channel subscribers, and the median of the channel's recent comparable uploads.
+2. Flag likely paid or embedded distribution when a short brand video has very high views but unusually low likes/comments, when independent trackers disagree sharply, or when there is little matching community discussion.
+3. Label the number as **observed reach** when paid distribution cannot be ruled out. Do not award the `YouTube >10K views/day` bonus from observed reach alone.
+4. Use followers only as context. Prefer recent median views, view-to-follower ratio, substantive comments, independent references, and reproductions.
+5. A high-reach marketing clip may support awareness, but it needs a detailed article, talk, case study, or technical artifact before it can support Tier 1 analysis.
+
+When evidence is mixed, report both: `observed reach: high` and `organic heat: unverified/medium/low`.
+
 **Heat baseline:** Start every item at 3 (it exists and passed content filter = baseline awareness). Add heat signals on top. Items with no heat signals beyond existence score 3–5 (worth knowing but not buzzing). Items scoring 8–10 mean "the entire builder community is talking about this right now."
 
 ### Composite Score
@@ -161,6 +195,8 @@ Why these weights:
 ### Per-builder filtering
 
 Each builder in `builders.json` has a `track_for` field specifying what to prioritize. An unlisted builder may enter only when they publish a direct, high-value first-party artifact that passes the same filter; record them as a database-maintenance candidate.
+
+Passing the content-type filter does not bypass the Builder qualification gate. An educator-led tutorial about an included topic is still excluded unless it contains an original build, experiment, or qualified first-party interview.
 
 ## Builder tracking database
 
@@ -243,6 +279,8 @@ For every discovered talk, run the reverse cross-platform correlation workflow: 
 
 For EVERY result: check against global IN/OUT rules and builder-specific `track_for`. Be strict. Merge same-event sources, remove previously covered items without a material delta, and preserve a short skipped list to prove coverage.
 
+Before scoring, record each surviving item's qualification (`core builder`, `production operator`, `first-party researcher`, or `builder interviewer`) and its heat provenance (`organic`, `paid/embedded suspected`, or `unknown`).
+
 ### Step 5: Score all passed items on 3 dimensions
 
 For each surviving item, assign three scores following the rubrics above:
@@ -266,7 +304,8 @@ Open every selected first-party source and extract:
 - 3–5 concrete facts, numbers, experiments, or mechanisms for substantive Tier 1 items;
 - why the evidence changes a builder decision;
 - one actionable takeaway;
-- the verified source bundle and compact cross-platform status.
+- the verified source bundle and compact cross-platform status;
+- the source qualification and whether heat is organic, observed reach, or uncertain.
 
 ### Step 7: Generate the digest report
 
@@ -336,6 +375,8 @@ Use the shortest prompt that selects the mode, output location, and any special 
 - **Opinion pollution**: Content filter (Step 4) is mandatory. No exceptions.
 - **YouTube upload lag**: Conference talks lag 1–3 weeks after event. "No new talks" ≠ no talks exist.
 - **Heat inflation**: A popular opinion thread (high heat) must still pass the content filter (low importance, likely opinion). Do NOT let high heat bypass content filter.
+- **Creator substitution**: Do not replace product builders, first-party researchers, or production operators with educators who merely explain the same feature. Audience size is not builder qualification.
+- **Paid-view inflation**: Do not convert high brand-video views directly into community heat when likes, comments, cross-platform discussion, or recent-channel baselines do not corroborate them.
 - **Thibault blindness**: Thibault Sottiaux's most important signals are often X-only. WebSearch picks these up indirectly with 12-24h lag. When Codex line shows zero signal, note it as a manual X-check in Tracking Gaps.
 - **Product-line blindness**: After each digest, scan for new product names in results and consider adding to `builders.json`.
 
@@ -352,6 +393,8 @@ After generating the digest:
 8. **Heat Radar**: Any high-heat/low-importance items flagged for "hype check"?
 9. **Coverage**: Every major product line got at least one search hit or a documented gap?
 10. **Next Steps**: Concrete, executable items?
+11. **Builder qualification**: Is every Tier 1 source a verified core builder, production operator, first-party researcher, or substantive builder interview?
+12. **Organic heat**: Were paid/embedded reach anomalies separated from organic discussion and engagement?
 
 ## Builder list maintenance
 

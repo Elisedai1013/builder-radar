@@ -1,5 +1,5 @@
 {
-  "version": "3.1.0",
+  "version": "3.5.0",
   "last_updated": "2026-07-13",
   "source": "Core list from 张咋啦 follow-builders (github.com/zarazhangrui/follow-builders), extended with high-signal independent technical builders and content-type filtering",
 
@@ -119,6 +119,45 @@
       "why": "Core Codex engineer, technical implementation perspective"
     },
     {
+      "name": "Ryan Lopopolo",
+      "company": "OpenAI",
+      "product": "Codex / harness engineering",
+      "role": "Member of Technical Staff",
+      "tier": "product_builder",
+      "twitter": "_lopopolo",
+      "content_types": ["blog", "talk", "x"],
+      "track_for": "Agent-first software delivery, harness engineering, PR throughput, agent review loops, production measurements and failure modes",
+      "search_keywords_en": ["Ryan Lopopolo harness engineering Codex", "OpenAI agent-first pull request workflow"],
+      "search_keywords_zh": ["Ryan Lopopolo Harness Engineering Codex", "Codex Agent PR 工作流"],
+      "why": "OpenAI engineer with quantified first-party production evidence: agent-written code, review loops, CI and high-volume pull-request delivery"
+    },
+    {
+      "name": "Maja Trebacz",
+      "company": "OpenAI",
+      "product": "Codex code review and action monitoring",
+      "role": "Researcher / Member of Technical Staff",
+      "tier": "product_builder",
+      "twitter": null,
+      "content_types": ["research", "talk", "blog"],
+      "track_for": "Codex code-review training, scalable oversight, action monitoring, reviewer precision and evaluation methods",
+      "search_keywords_en": ["Maja Trebacz Codex code review", "Maja Trebacz action monitoring OpenAI"],
+      "search_keywords_zh": ["Maja Trebacz Codex 代码审查", "Codex 可扩展监督"],
+      "why": "First-party OpenAI researcher working on deployed Codex code review, oversight and action-monitoring systems"
+    },
+    {
+      "name": "Romain Huet",
+      "company": "OpenAI",
+      "product": "Codex / OpenAI API",
+      "role": "Head of Developer Experience",
+      "tier": "product_builder",
+      "twitter": "romainhuet",
+      "content_types": ["x", "talk", "demo", "blog"],
+      "track_for": "Codex product workflows, GitHub and CLI review, developer adoption, first-party demos and operating practices",
+      "search_keywords_en": ["Romain Huet Codex OpenAI", "Romain Huet Codex code review"],
+      "search_keywords_zh": ["Romain Huet Codex", "Codex GitHub 代码审查"],
+      "why": "OpenAI Developer Experience lead working directly on Codex and its developer workflows"
+    },
+    {
       "name": "Kim Beverett",
       "company": "OpenAI",
       "product": "ChatGPT",
@@ -221,6 +260,19 @@
       "search_keywords_en": ["Aaron Levie Box AI enterprise 2026", "Box AI latest"],
       "search_keywords_zh": ["Aaron Levie Box AI 企业 2026"],
       "why": "Box CEO, real AI adoption signals in enterprise SaaS"
+    },
+    {
+      "name": "Austin Ray",
+      "company": "Ramp",
+      "product": "AI Developer Experience / Codex deployment",
+      "role": "AI DevEx Lead",
+      "tier": "production_operator",
+      "twitter": null,
+      "content_types": ["case_study", "talk", "blog"],
+      "track_for": "Measured production use of Codex code review, PR feedback latency, developer adoption, internal agent tooling and operational tradeoffs",
+      "search_keywords_en": ["Austin Ray Ramp Codex code review", "Ramp AI DevEx Codex pull request"],
+      "search_keywords_zh": ["Austin Ray Ramp Codex 代码审查", "Ramp AI DevEx PR"],
+      "why": "Production operator responsible for real Codex adoption and code-review workflows at Ramp"
     },
     {
       "name": "Swyx",

@@ -1,6 +1,6 @@
 # Builder Radar — Daily Deep — {{DATE}}
 
-> {{WEEKDAY}} · First-party AI builder intelligence · builder-radar v3.4
+> {{WEEKDAY}} · First-party AI builder intelligence · builder-radar v3.5
 
 ## Executive Summary / 概要
 
@@ -17,6 +17,8 @@
 | 候选池 | {{CANDIDATE_COUNT}} 条；过滤后入选 {{SELECTED_COUNT}} 条 |
 | 精读原文 | {{PRIMARY_PAGES_READ}} 个第一方页面 |
 | Builder / 组织覆盖 | {{ORG_COUNT}} 个：{{ORG_LIST}} |
+| Builder 资格核验 | Core builder {{CORE_BUILDER_COUNT}} · Production operator {{OPERATOR_COUNT}} · Researcher {{RESEARCHER_COUNT}} · Interview {{INTERVIEW_COUNT}} |
+| 热度质量 | 自然热度已核验 {{ORGANIC_HEAT_COUNT}} 条；疑似付费/嵌入触达 {{PAID_REACH_COUNT}} 条 |
 | 去重 | 对照最近 {{REPORTS_CHECKED}} 份日报，移除 {{DEDUP_COUNT}} 个重复事件 |
 
 ---
@@ -29,6 +31,7 @@
 
 **评分：** 实时性 {{R}}/10 · 重要程度 {{I}}/10 · 火爆程度 {{H}}/10 · **综合 {{C}}/10**
 **Builder / 日期：** {{BUILDER}}（{{ORG}}）· {{EXACT_DATE}} · {{CONTENT_TYPE}}
+**资格 / 热度来源：** {{QUALIFICATION}} · {{HEAT_PROVENANCE}}
 
 **一句话：** {{CORE_CLAIM}}
 
@@ -62,6 +65,7 @@
 
 **评分：** 实时性 {{R}} · 重要程度 {{I}} · 火爆程度 {{H}} · **综合 {{C}}**
 **Builder / 日期：** {{BUILDER}}（{{ORG}}）· {{EXACT_DATE}}
+**资格 / 热度来源：** {{QUALIFICATION}} · {{HEAT_PROVENANCE}}
 
 **一句话：** {{CORE_CLAIM}}
 
@@ -94,7 +98,7 @@
 
 ## Skipped / 过滤记录
 
-- {{ITEM_OR_TOPIC}} — {{REASON: recap / opinion / duplicate / unverifiable / stale}}
+- {{ITEM_OR_TOPIC}} — {{REASON: recap / opinion / duplicate / unverifiable / stale / educator-only / role unverified / topic mismatch / paid reach only}}
 
 ## Tracking Gaps / 信息盲区
 
@@ -110,4 +114,4 @@
 
 ---
 
-_每条结论均以直接一手来源为核心；第三方内容仅用于发现线索或验证热度。未找到匹配平台时只表示“尚未找到”，不表示该内容不存在。_
+_每条结论均以直接一手来源为核心；第三方内容仅用于发现线索或验证热度。播放量与自然热度分开判断；疑似付费或嵌入分发只记录 observed reach。未找到匹配平台时只表示“尚未找到”，不表示该内容不存在。_

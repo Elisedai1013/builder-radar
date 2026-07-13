@@ -3,7 +3,7 @@
 > 追踪 AI Builder 真正发布或验证了什么，并把一手原文读成可行动的深度日报。
 > Track what AI builders ship or prove, then explain what builders can learn.
 
-[![Version](https://img.shields.io/badge/version-3.4.0-blue)](https://github.com/Elisedai1013/builder-radar)
+[![Version](https://img.shields.io/badge/version-3.5.0-blue)](https://github.com/Elisedai1013/builder-radar)
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 [![Builders](https://img.shields.io/badge/builders-31-orange)](./builders.json)
 
@@ -25,6 +25,24 @@ Builder Radar 会：
 > **Track what people SHIP or PROVE, not what they merely THINK.**
 
 产品发布、真实 Demo、研究与工程深潜、Builder 实验、数据化生产案例和一手 Talk 优先；泛观点、预测、争议、recap 和纯 hype 会被过滤。
+
+## v3.5：Builder 资格门槛与自然热度
+
+`AI 内容创作者` 不再自动等同于 `AI Builder`。进入 Tier 1 的来源必须属于以下一种：
+
+- 直接构建或负责相关产品、模型、研究系统的 Core Builder；
+- 在真实组织中运行该产品并给出指标、失败或流程证据的 Production Operator；
+- 亲自完成相关训练、评估、安全或技术机制的 First-party Researcher；
+- 对上述 Builder 进行实质访谈，并获取具体机制与运营细节的 Builder Interviewer。
+
+只有粉丝量、工具讲解或初学者教程，没有原创构建、实验或生产证据的教育型创作者会被跳过或降级。内容还必须直接命中所研究的能力；例如泛 Codex 教程不能仅凭提到 GitHub 就充当 PR Review 深度来源。
+
+热度也拆成两部分：
+
+- **Observed reach**：公开播放或曝光数字；
+- **Organic heat**：点赞、评论、近期频道基线、跨 Builder 引用、社区复现和独立讨论共同支持的自然热度。
+
+品牌短视频出现高播放、低互动，或多个统计源差异很大时，会标记为疑似付费/嵌入分发，不直接获得 YouTube 热度加分。
 
 ## v3.4：Daily Deep
 
@@ -109,6 +127,8 @@ Builder Radar 会：
 
 火爆程度 ≥8、重要程度 <7 的内容会进入 `Heat Radar`，提醒读者它很热，但未必可行动。
 
+播放量不能单独决定火爆程度。频道粉丝数只作背景信息，优先使用近期同类视频中位播放、播放/粉丝比、实质评论、跨平台讨论和社区复现来判断自然热度。
+
 ## 跨平台关联 / Cross-platform Correlation
 
 - X 发现发布、Demo 或技术线索后，继续搜索同事件的 YouTube 与第一方文章。
@@ -119,11 +139,12 @@ Builder Radar 会：
 
 ## 覆盖范围 / Coverage
 
-当前追踪 **31 位 Builder**：
+当前追踪 **35 位 Builder / Production Operator**：
 
 | Tier | 数量 | 代表 Builder |
 |------|------|-------------|
-| Product Builder | 21 | Boris Cherny, Thibault Sottiaux, Amjad Masad, Guillermo Rauch, Simon Willison, Armin Ronacher |
+| Product Builder | 24 | Boris Cherny, Thibault Sottiaux, Ryan Lopopolo, Maja Trebacz, Romain Huet, Simon Willison |
+| Production Operator | 1 | Austin Ray |
 | Official | 2 | Claude, Google Labs |
 | Ecosystem | 7 | Swyx, Dan Shipper, Garry Tan, Matt Turck |
 | Observer | 1 | Andrej Karpathy |
@@ -166,10 +187,11 @@ builder-radar/
 
 ## 版本 / Version
 
-**v3.4.0 — Daily Deep + first-party editorial quality**
+**v3.5.0 — Builder qualification + organic heat normalization**
 
 | 版本 | 关键变更 |
 |------|---------|
+| v3.5.0 | 新增 Builder 资格门槛；区分教育型创作者与一线 Builder/研究员/生产运营者；拆分 observed reach 与 organic heat；识别疑似付费播放；新增 Ryan Lopopolo、Maja Trebacz、Romain Huet、Austin Ray |
 | v3.4.0 | Daily Deep 默认模式；原文精读；候选池、去重与来源多样性；深度内容卡；新增 Simon Willison、Armin Ronacher；最佳调用实践 |
 | v3.3.0 | X、YouTube、官方博客双向关联检索；同一事件合并并记录缺失平台状态 |
 | v3.2.0 | 三级来源链接验证，链接缺失自动降级 |
