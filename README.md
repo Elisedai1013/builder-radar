@@ -1,4 +1,4 @@
-# 🔭 Builder Radar / AI Builder 前沿信息每日雷达
+# 🔭 Builder Radar
 
 > 追踪 29 位 AI 产品 Builder 的 shipping 动态，不做观点二传手。
 > Track what 29 AI product builders SHIP, not what they THINK.
@@ -7,9 +7,9 @@
 
 ## 这是什么？ / What is this?
 
-**Builder Radar** 是一个 WorkBuddy Skill，每日扫描 AI Builder 圈的产品发布、技术深度文、大会演讲，用三维打分体系（实时性 × 重要程度 × 火爆程度）帮你筛选出真正值得看的内容。
+**Builder Radar** 是一个 AI Agent Skill，每日扫描 AI Builder 圈的产品发布、技术深度文、大会演讲，用三维打分体系（实时性 × 重要程度 × 火爆程度）帮你筛选出真正值得看的内容。
 
-**Builder Radar** is a WorkBuddy Skill that scans the AI builder ecosystem daily — product launches, technical deep-dives, conference talks — filtered through a 3D scoring system (Freshness × Importance × Community Heat).
+**Builder Radar** is an AI Agent Skill that scans the AI builder ecosystem daily — product launches, technical deep-dives, conference talks — filtered through a 3D scoring system (Freshness × Importance × Community Heat).
 
 ### 核心原则 / Core Principle
 
@@ -42,7 +42,7 @@
 
 ```
 builder-radar/
-├── SKILL.md          # Skill 工作流定义 / Workflow definition
+├── SKILL.md          # 工作流定义 / Workflow definition
 ├── builders.json     # 29 位 Builder 追踪库 / Builder tracking database
 ├── templates/
 │   └── digest.md     # 日报模板 / Daily digest template
@@ -56,22 +56,6 @@ builder-radar/
 ```bash
 # 通过 SkillHub
 skillhub install builder-radar
-
-# 或手动拷贝
-cp -r . ~/.workbuddy/skills/builder-radar/
-```
-
----
-
-## 使用 / Usage
-
-在 WorkBuddy 中说：
-
-```
-"run radar"           → 完整 7 步扫描流程
-"今天有什么新东西"     → 每日雷达
-"有什么火的内容"       → 只看热度扫描
-"最近 Codex 有什么"    → 单产品线深度追踪
 ```
 
 ---
