@@ -1,21 +1,7 @@
 ---
-slug: builder-radar
-displayName: Builder Radar — AI Builder 前沿信息每日雷达
-version: 3.2.1
-summary: 每日追踪 29 位 AI 产品 Builder 的 shipping 动态，三维打分（实时性×重要程度×火爆程度），输出结构化日报。聚焦产品发布、技术深度文、大会演讲，自动过滤观点噪音。
-license: MIT
 name: builder-radar
-description: AI builder frontier information tracker. Aggregates the latest from X posts, product blogs, and YouTube conference talks for core AI product builders. Designed for daily use — balances real-time freshness, importance, and community heat.
-author: WorkBuddy
-triggers:
-  - "what's new in AI building"
-  - "最近有什么值得看的"
-  - "track builders"
-  - "builder radar"
-  - "追踪 AI 进展"
-  - "run radar"
-  - "今天有什么新东西"
-  - "AI builder 动态"
+description: Daily AI builder frontier tracker that correlates X posts, YouTube videos, and first-party blogs for core AI product builders, filters for concrete shipping signals, scores freshness, strategic importance, and community heat, and generates a sourced digest. Use for builder radar, AI builder updates, what's new in AI building, recent launches and demos, or tracking AI product progress.
+license: MIT
 ---
 
 # Builder Radar — AI builder 前沿信息每日雷达
@@ -49,6 +35,21 @@ Every item in the digest MUST include links. When collecting links, follow this 
 2. If a talk has a blog version AND a YouTube video, include BOTH (blog format: `[原文](URL)`, video format: `[🎬](YOUTUBE_URL)`).
 3. If NONE of the three can be found → the item is **unverified**. Demote it to Tier 3 or mark as "pending verification". Never put an unverified item in Tier 1.
 4. For conference talks (AIE, Config, etc.): YouTube link is the hardest requirement. These talks exist on YouTube — if you can't find the link, search harder or mark the talk as "not yet uploaded".
+
+### Cross-platform correlation (MANDATORY)
+
+Treat X, YouTube, and first-party blogs as connected evidence for the **same event**, not as three independent feeds.
+
+For every promising X signal:
+1. Extract the builder name, product, feature/event phrase, and any talk or demo title.
+2. Search YouTube with at least two query variants, such as `"{builder} {product} {feature}"` and `"{event/title} {builder}"`.
+3. Search the builder's blog and company newsroom/changelog for the same event.
+4. Attach all verified matching URLs to one digest item. Do not create duplicate items per platform.
+5. If no matching YouTube video is found, write **"No matching YouTube video found; it may not be uploaded yet"** in the source bundle. Absence of a search result is not proof that no video exists.
+
+Apply the same process in reverse for every promising YouTube talk: search for the speaker's X announcement and a first-party blog, slides, transcript, or product page. Use title, speaker, event, product, and distinctive feature terms rather than a single exact-title query.
+
+Reject false matches: a video must describe the same release, demo, talk, or technical topic—not merely mention the same builder or product.
 
 ## Three-dimensional scoring (v3.0)
 
@@ -176,6 +177,9 @@ For every search result that appears promising, record the **direct URL** of the
 
 These URLs MUST appear in the final digest report. No URL → treat the item as unverified and demote it.
 
+**MANDATORY — correlate every X signal before scoring:**
+For each promising X result, immediately run the cross-platform correlation workflow above. Record the YouTube queries attempted, the matching direct video URL when found, the first-party blog URL when found, and an explicit not-yet-found note otherwise. Complete this before heat scoring so YouTube views and cross-platform coverage can contribute to the heat evidence.
+
 **Search priority order:**
 1. Tier-1 product_builder: Boris Cherny, Thariq Shihipar, Thibault Sottiaux, Peter Steinberger, Amjad Masad, Guillermo Rauch
 2. Other product_builder (Anthropic, OpenAI, Google, Replit, Vercel, Box, Notion, Roblox)
@@ -207,6 +211,8 @@ Run parallel WebSearch queries for each conference channel in `builders.json`. F
 
 **CRITICAL — extract YouTube URLs:**
 For every talk found, extract the direct YouTube video URL (`youtube.com/watch?v={id}`). These are REQUIRED for Tier 3 entries — without them the user can't actually watch the talk. If a talk is mentioned but no YouTube URL can be found, note it as a "pending verification" item rather than a confirmed Tier 3 entry.
+
+For every discovered talk, run the reverse cross-platform correlation workflow: search the speaker's X account and first-party sites for the matching announcement, slides, transcript, demo, or product release. Merge the results into a single source bundle.
 
 ### Step 4: Apply content filter
 
@@ -261,6 +267,7 @@ Always end with: "Any of these talks you want me to process with `youtube-learni
 ## Pitfalls
 
 - **Missing source links**: Every Tier 1/2/3 item MUST include a direct URL to the original source. Blog → blog URL. X post → tweet URL. Talk → YouTube URL. This is the #1 user complaint — if they can't click through to read/watch, the radar is worthless.
+- **Siloed source scanning**: Never report an X signal before checking YouTube and first-party sites for the same event, and never report a YouTube talk before checking X and first-party sites. Merge matching evidence into one item.
 - **Opinion pollution**: Content filter (Step 4) is mandatory. No exceptions.
 - **YouTube upload lag**: Conference talks lag 1–3 weeks after event. "No new talks" ≠ no talks exist.
 - **Heat inflation**: A popular opinion thread (high heat) must still pass the content filter (low importance, likely opinion). Do NOT let high heat bypass content filter.
@@ -271,11 +278,12 @@ Always end with: "Any of these talks you want me to process with `youtube-learni
 
 After generating the digest:
 1. **Links check (MANDATORY)**: For EVERY Tier 1/2 item, verify in this order: (1) YouTube link if it's a talk, (2) author's blog link, (3) X/Twitter link. At least one must be provided. Conference talks MUST have YouTube URL. Tier 3 table MUST have YouTube Link for every row. No URL → fix or demote before presenting.
-2. **Content filter**: Every Tier 1 item passed the IN/OUT gate? Remove any opinions.
-3. **3D scores**: Are all three scores justified with evidence (not gut feel)?
-4. **Heat Radar**: Any high-heat/low-importance items flagged for "hype check"?
-5. **Coverage**: Every major product line got at least one search hit?
-6. **Next Steps**: Concrete, executable items?
+2. **Correlation check (MANDATORY)**: For every X-derived item, is the YouTube search result recorded as a matching URL or an explicit not-yet-found note? For every YouTube-derived item, were matching X and first-party sources checked? Are cross-platform matches merged instead of duplicated?
+3. **Content filter**: Every Tier 1 item passed the IN/OUT gate? Remove any opinions.
+4. **3D scores**: Are all three scores justified with evidence (not gut feel)?
+5. **Heat Radar**: Any high-heat/low-importance items flagged for "hype check"?
+6. **Coverage**: Every major product line got at least one search hit?
+7. **Next Steps**: Concrete, executable items?
 
 ## Builder list maintenance
 

@@ -3,7 +3,7 @@
 > 追踪 29 位 AI 产品 Builder 的 shipping 动态，不做观点二传手。
 > Track what 29 AI product builders SHIP, not what they THINK.
 
-[![Version](https://img.shields.io/badge/version-3.2.0-blue)](https://github.com/Elisedai1013/builder-radar)
+[![Version](https://img.shields.io/badge/version-3.3.0-blue)](https://github.com/Elisedai1013/builder-radar)
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 [![Builders](https://img.shields.io/badge/builders-29-orange)](./builders.json)
 
@@ -93,6 +93,15 @@ Live Demo / 录屏                     "AI 的未来" 泛泛而谈
 
 每一条 Tier 1/2 内容都附带**三级来源链接**（YouTube → 作者博客 → X 原帖），保证你能点进去看原文。
 
+### 跨平台关联检索（v3.3）
+
+X、YouTube 和官方博客不是三个互不相干的信息流。Builder Radar 会把它们视为同一事件的互证来源：
+
+- X 发现值得关注的发布、Demo 或技术线索后，继续用 Builder、产品、功能和事件关键词搜索对应 YouTube 视频与官方文章。
+- YouTube 发现重要 Talk 后，反向搜索演讲者的 X 发布、官方博客、产品页、讲稿或幻灯片。
+- 匹配内容合并成一条信息，同时提供全部原始链接，避免按平台重复收录。
+- 未找到对应 YouTube 内容时明确标记“可能尚未上传”，不把搜索无结果误判为视频不存在。
+
 ---
 
 ## 工作流概览 / Workflow at a Glance
@@ -100,12 +109,12 @@ Live Demo / 录屏                     "AI 的未来" 泛泛而谈
 ```
 Step 0: 加载追踪库 + 时间窗口计算
 Step 1: 并行搜索 29 位 Builder 的 shipping 信号
-Step 2: 收集社区热度信号（跨 Builder 引用、HN、媒体报道）
-Step 3: 搜索新上传的大会演讲（YouTube）
-Step 4: 内容过滤器（IN/OUT 门禁）
-Step 5: 三维独立打分
-Step 6: 生成结构化日报
-Step 7: 呈现 + 提供下一步行动建议
+Step 2: 对 X / YouTube / 官方博客执行双向关联检索并合并同一事件
+Step 3: 收集社区热度信号（跨 Builder 引用、HN、媒体报道）
+Step 4: 搜索新上传的大会演讲（YouTube）并反查 X 与官方来源
+Step 5: 内容过滤器（IN/OUT 门禁）
+Step 6: 三维独立打分
+Step 7: 生成结构化日报并提供下一步行动建议
 ```
 
 完整工作流定义见 [SKILL.md](./SKILL.md)。
@@ -135,10 +144,11 @@ builder-radar/
 
 ## 版本 / Version
 
-**v3.2.0** — Source Link Priority 三级验证 + 3D 独立打分 + Heat Radar + 内容过滤
+**v3.3.0** — X ↔ YouTube ↔ 官方博客双向关联检索 + Source Bundle + 3D 独立打分
 
 | 版本 | 关键变更 |
 |------|---------|
+| v3.3.0 | X、YouTube、官方博客双向关联检索；同一事件合并并记录缺失平台状态 |
 | v3.2.0 | 三级来源链接验证（YouTube → 博客 → X），链接缺失自动降级 |
 | v3.0.0 | 三维独立打分替代单一公式，新增火爆程度维度 + Heat Radar |
 | v2.0.0 | 内容过滤器 + builder 追踪库结构化 |

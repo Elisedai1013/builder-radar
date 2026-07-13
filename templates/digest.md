@@ -32,7 +32,8 @@ Items with composite ≥ 7.0. Product_builder tier, passed content filter, high 
 - **Why it matters:** 1-2 sentences — what changes if you act on this?
 - **Heat signals:** {{HEAT_DETAIL}} (e.g., "3 builders discussing, HN front page, 50K+ YouTube views")
 - **Actionable:** What can I DO with this info in the next 24h?
-- **Link:** {{URL}}
+- **Source bundle:** [X]({{X_URL}}) · [Official/blog]({{BLOG_URL}}) · [YouTube]({{YOUTUBE_URL}})
+- **Cross-platform check:** {{CROSS_PLATFORM_STATUS}}
 
 ### {{RANK}}. {{ITEM_TITLE}}
 
@@ -50,7 +51,8 @@ Items with composite ≥ 7.0. Product_builder tier, passed content filter, high 
 - **Why it matters:** 1-2 sentences
 - **Heat signals:** {{HEAT_DETAIL}}
 - **Actionable:** What can I DO?
-- **Link:** {{URL}}
+- **Source bundle:** [X]({{X_URL}}) · [Official/blog]({{BLOG_URL}}) · [YouTube]({{YOUTUBE_URL}})
+- **Cross-platform check:** {{CROSS_PLATFORM_STATUS}}
 
 ### {{RANK}}. {{ITEM_TITLE}}
 
@@ -68,28 +70,29 @@ Items with composite ≥ 7.0. Product_builder tier, passed content filter, high 
 - **Why it matters:** 1-2 sentences
 - **Heat signals:** {{HEAT_DETAIL}}
 - **Actionable:** What can I DO?
-- **Link:** {{URL}}
+- **Source bundle:** [X]({{X_URL}}) · [Official/blog]({{BLOG_URL}}) · [YouTube]({{YOUTUBE_URL}})
+- **Cross-platform check:** {{CROSS_PLATFORM_STATUS}}
 
 ---
 
 ## Tier 2 — Worth Knowing / 值得关注
 Composite 4.0–6.9. Shipping content but lower urgency, or ecosystem signals with data.
 
-| # | Item | 🔴 | 🔵 | 🟡 | ⭐ | Source | Link |
-|---|------|-----|-----|-----|-----|--------|------|
-| 1 | {{TITLE}} — {{ONE_LINE}} | {{R}} | {{I}} | {{H}} | {{C}} | {{NAME}} ({{COMPANY}}) | [原文]({{URL}}) / [🎬]({{VIDEO_URL}}) |
-| 2 | {{TITLE}} — {{ONE_LINE}} | {{R}} | {{I}} | {{H}} | {{C}} | {{NAME}} ({{COMPANY}}) | [原文]({{URL}}) / [🎬]({{VIDEO_URL}}) |
-| 3 | {{TITLE}} — {{ONE_LINE}} | {{R}} | {{I}} | {{H}} | {{C}} | {{NAME}} ({{COMPANY}}) | [原文]({{URL}}) / [🎬]({{VIDEO_URL}}) |
+| # | Item | 🔴 | 🔵 | 🟡 | ⭐ | Source | Cross-platform sources |
+|---|------|-----|-----|-----|-----|--------|------------------------|
+| 1 | {{TITLE}} — {{ONE_LINE}} | {{R}} | {{I}} | {{H}} | {{C}} | {{NAME}} ({{COMPANY}}) | [X]({{X_URL}}) / [原文]({{BLOG_URL}}) / [🎬]({{YOUTUBE_URL}}) · {{CROSS_PLATFORM_STATUS}} |
+| 2 | {{TITLE}} — {{ONE_LINE}} | {{R}} | {{I}} | {{H}} | {{C}} | {{NAME}} ({{COMPANY}}) | [X]({{X_URL}}) / [原文]({{BLOG_URL}}) / [🎬]({{YOUTUBE_URL}}) · {{CROSS_PLATFORM_STATUS}} |
+| 3 | {{TITLE}} — {{ONE_LINE}} | {{R}} | {{I}} | {{H}} | {{C}} | {{NAME}} ({{COMPANY}}) | [X]({{X_URL}}) / [原文]({{BLOG_URL}}) / [🎬]({{YOUTUBE_URL}}) · {{CROSS_PLATFORM_STATUS}} |
 
 ---
 
 ## Tier 3 — New Talks Discovered / 新 Talk 发现
 YouTube talks uploaded recently, ready for `youtube-learning` deep processing.
 
-| # | Talk | Speaker | Channel | Uploaded | Why Process | 🎬 Link |
-|---|------|---------|---------|----------|-------------|---------|
-| 1 | {{TITLE}} | {{NAME}} | {{CHANNEL}} | {{DATE}} | {{REASON}} | [YouTube]({{YOUTUBE_URL}}) |
-| 2 | {{TITLE}} | {{NAME}} | {{CHANNEL}} | {{DATE}} | {{REASON}} | [YouTube]({{YOUTUBE_URL}}) |
+| # | Talk | Speaker | Channel | Uploaded | Why Process | Cross-platform sources |
+|---|------|---------|---------|----------|-------------|------------------------|
+| 1 | {{TITLE}} | {{NAME}} | {{CHANNEL}} | {{DATE}} | {{REASON}} | [YouTube]({{YOUTUBE_URL}}) / [X]({{X_URL}}) / [原文]({{BLOG_URL}}) · {{CROSS_PLATFORM_STATUS}} |
+| 2 | {{TITLE}} | {{NAME}} | {{CHANNEL}} | {{DATE}} | {{REASON}} | [YouTube]({{YOUTUBE_URL}}) / [X]({{X_URL}}) / [原文]({{BLOG_URL}}) · {{CROSS_PLATFORM_STATUS}} |
 
 ---
 
