@@ -1,23 +1,24 @@
 ---
 name: builder-radar
-description: Daily AI builder frontier tracker that correlates X posts, YouTube videos, and first-party blogs for core AI product builders, filters for concrete shipping signals, scores freshness, strategic importance, and community heat, and generates a sourced digest. Use for builder radar, AI builder updates, what's new in AI building, recent launches and demos, or tracking AI product progress.
-license: MIT
+description: Daily and deep AI builder frontier tracker that scans recent shipping plus first-party research, engineering blogs, papers, builder long-form posts, GitHub releases, X posts, and YouTube talks; correlates matching sources, filters noise, scores freshness, importance, and heat, and produces a source-verified Chinese digest. Use for builder radar, AI builder daily reports, deep AI builder reading, recent launches and demos, conference-talk discovery, or tracking a specific AI product line.
 ---
 
 # Builder Radar — AI builder 前沿信息每日雷达
 
-## When to use
+## Operating modes
 
-This skill treats information discovery as a **multi-source, multi-frequency problem**. Designed for **daily invocation**:
-- Default: "run radar" / "今天有什么新东西" → full 7-step workflow
-- Quick: "有什么火的内容" → heat-only scan across recent 48h
-- Deep: "最近 XX 产品线有什么" → targeted deep-dive on a product line
+Treat discovery as a **multi-source, multi-frequency problem**. Select one mode before searching:
+
+- **Daily Deep (recommended default):** scan shipping from the last 24 hours, then scan first-party deep content from the rolling 7 days. Extend to 14 days only for unusually valuable, still-actionable material.
+- **Quick Heat:** scan the last 48 hours for high-heat signals and label hype risk. Do not produce a full deep digest.
+- **Product Deep Dive:** focus on one product line, use a 14-day default window, and reconstruct its release, technical, and community evidence.
+- **Talk Discovery:** focus on newly uploaded talks and return direct YouTube links plus matching X and first-party materials.
 
 ## Core principle
 
-> **Track what people SHIP, not what they THINK.**
+> **Track what people SHIP or PROVE, then explain what builders can learn.**
 >
-> Product launches > demos > technical deep-dives > official blog posts > verified case studies > conference talks.
+> Product launches > demos > research and engineering deep-dives > builder-written experiments > verified case studies > conference talks.
 > Opinions, predictions, hot takes, commentary — skip them. They don't give you information you can act on.
 
 ## Source link priority (MANDATORY — checked BEFORE presenting)
@@ -26,8 +27,8 @@ Every item in the digest MUST include links. When collecting links, follow this 
 
 | Priority | Source type | What to link | Search method |
 |----------|-------------|-------------|---------------|
-| **🥇 1st** | YouTube video | `youtube.com/watch?v={id}` | If content was a talk/presentation, search "[title] [speaker] youtube". AIE / Config / buildergroop etc. talks MUST have this. |
-| **🥈 2nd** | Author's blog | Direct blog URL | Search "[author name] blog [topic]" or `site:author-domain.com [keyword]`. Builder-written original posts are preferred over third-party recaps. |
+| **🥇 1st** | First-party primary artifact | Direct builder blog, research paper, product/engineering post, GitHub release, code, or changelog URL | Search the author/company domain and open the canonical artifact. This is the evidence anchor. |
+| **🥈 2nd** | YouTube video | `youtube.com/watch?v={id}` | If content was a talk/presentation, search "[title] [speaker] youtube". AIE / Config / buildergroop etc. talks MUST have this. |
 | **🥉 3rd** | X/Twitter | `x.com/{user}/status/{id}` or `twitter.com/{user}/status/{id}` | Search "[author name] X [keyword]" or build from builder's known X handle. Especially critical for Thibault Sottiaux (X-only signals). |
 
 **Rules:**
@@ -50,6 +51,18 @@ For every promising X signal:
 Apply the same process in reverse for every promising YouTube talk: search for the speaker's X announcement and a first-party blog, slides, transcript, or product page. Use title, speaker, event, product, and distinctive feature terms rather than a single exact-title query.
 
 Reject false matches: a video must describe the same release, demo, talk, or technical topic—not merely mention the same builder or product.
+
+## Editorial quality bar (MANDATORY)
+
+The digest must read like a concise research brief, not a link directory or a filled template.
+
+1. Open and read the original source for every selected item. Search snippets can discover candidates but cannot support the final analysis.
+2. Record an exact publication date and at least one direct first-party URL. Do not use vague dates such as "recently". If the date or source cannot be verified, omit or demote the item.
+3. Extract **3–5 verifiable facts, numbers, experiments, design decisions, or technical mechanisms** from each Tier 1 item. Use fewer only when the original artifact is inherently short, such as a changelog entry.
+4. Explain the core claim, evidence chain, why it matters, and one concrete builder action. Do not paraphrase the headline repeatedly.
+5. Use third-party reports only to discover primary sources or measure heat. Never let a recap replace the builder's post, paper, code, talk, or official engineering article.
+6. Present the same event once. Merge its X, blog, paper, GitHub, and YouTube evidence into one item; do not repeat the full analysis in both a Tier section and the Talk table.
+7. Keep scores and correlation status compact so evidence and mechanisms receive most of the space.
 
 ## Three-dimensional scoring (v3.0)
 
@@ -126,7 +139,9 @@ Why these weights:
 ### IN — things we track
 - Product launch announcements
 - New feature / capability releases
+- First-party research papers with concrete findings, code, or evaluations
 - Technical deep-dives and architecture posts
+- Builder-written experiments and implementation reports
 - Live demos and demo recordings
 - Official blog posts from product companies
 - Shipping updates and changelogs
@@ -145,11 +160,11 @@ Why these weights:
 
 ### Per-builder filtering
 
-Each builder in `builders.json` has a `track_for` field specifying exactly what we care about. Never stray from it.
+Each builder in `builders.json` has a `track_for` field specifying what to prioritize. An unlisted builder may enter only when they publish a direct, high-value first-party artifact that passes the same filter; record them as a database-maintenance candidate.
 
 ## Builder tracking database
 
-Load `@builders.json` at the start of every session. It contains 29 builders across Anthropic, OpenAI, Google, Replit, Vercel, Box, Notion, and ecosystem. The full list originates from 张咋啦's `follow-builders` repository (github.com/zarazhangrui/follow-builders).
+Load `@builders.json` at the start of every session. It contains core builders and first-party source lists across Anthropic, OpenAI, Google, Replit, Vercel, Box, Notion, and the independent builder ecosystem. The list originates from 张咋啦's `follow-builders` repository and is extended with high-signal independent technical builders.
 
 ## Workflow
 
@@ -162,11 +177,20 @@ Read `builders.json`. Note today's date and calculate temporal windows:
 
 Also note any recent (`≤2 weeks`) major product launches that should trigger the +1 freshness bonus in Step 5.
 
-### Step 1: Search for builder shipping signals
+For Daily Deep mode, inspect up to the 7 most recent `Builder_Radar_*.md` reports in the output directory. Build a deduplication list of previously covered events. Re-include an event only when a material new artifact, result, release, or metric appeared; state the delta.
+
+### Step 1: Build the candidate pool
 
 Run **parallel** WebSearch queries for all `product_builder` tier builders first, then `official`, then `ecosystem`.
 
-Each search uses the builder's `search_keywords_en[0]` from `builders.json`. Add time qualifiers: "July 2026" or "latest".
+Start with the builder's `search_keywords_en` entries from `builders.json`; use at least two query variants for priority builders or whenever the first query is inconclusive. Add the current month/year or `latest` rather than a hard-coded date.
+
+In Daily Deep mode, run both passes:
+
+1. **24-hour shipping pass:** launches, releases, demos, changelogs, and concrete product changes.
+2. **Rolling 7-day deep pass:** scan `product_blog_sources` plus builder blogs for research, engineering articles, papers, implementation reports, and data-backed case studies.
+
+When source volume permits, collect at least 15 candidates before ranking. Candidate count includes later-filtered items; never fabricate or pad the final digest to hit a quota.
 
 **CRITICAL — capture source URLs:**
 For every search result that appears promising, record the **direct URL** of the original source (not aggregator/recap pages):
@@ -182,9 +206,10 @@ For each promising X result, immediately run the cross-platform correlation work
 
 **Search priority order:**
 1. Tier-1 product_builder: Boris Cherny, Thariq Shihipar, Thibault Sottiaux, Peter Steinberger, Amjad Masad, Guillermo Rauch
-2. Other product_builder (Anthropic, OpenAI, Google, Replit, Vercel, Box, Notion, Roblox)
-3. Official accounts
-4. Ecosystem / observer
+2. First-party `product_blog_sources`, especially research and engineering blogs
+3. Other product_builder (Anthropic, OpenAI, Google, Replit, Vercel, Box, Notion, Roblox, independent technical builders)
+4. Official accounts
+5. Ecosystem / observer
 
 ### Step 2: Collect heat signals (NEW in v3.0)
 
@@ -214,9 +239,9 @@ For every talk found, extract the direct YouTube video URL (`youtube.com/watch?v
 
 For every discovered talk, run the reverse cross-platform correlation workflow: search the speaker's X account and first-party sites for the matching announcement, slides, transcript, demo, or product release. Merge the results into a single source bundle.
 
-### Step 4: Apply content filter
+### Step 4: Apply content filter and deduplicate
 
-For EVERY result: check against global IN/OUT rules AND builder-specific `track_for`. Be strict.
+For EVERY result: check against global IN/OUT rules and builder-specific `track_for`. Be strict. Merge same-event sources, remove previously covered items without a material delta, and preserve a short skipped list to prove coverage.
 
 ### Step 5: Score all passed items on 3 dimensions
 
@@ -230,7 +255,20 @@ Then compute composite: `0.3×实时性 + 0.4×重要程度 + 0.3×火爆程度`
 
 Sort by composite descending. For ties, prefer 重要程度.
 
-### Step 6: Generate the digest report
+### Step 6: Select and deeply read the final items
+
+In Daily Deep mode, select 5–8 items when enough qualifying material exists; otherwise return fewer. Aim to cover at least 4 builders or organizations, and normally cap one organization at 2 items unless multiple developments are independently indispensable.
+
+Open every selected first-party source and extract:
+
+- the one-sentence core claim;
+- what was shipped, tested, or discovered;
+- 3–5 concrete facts, numbers, experiments, or mechanisms for substantive Tier 1 items;
+- why the evidence changes a builder decision;
+- one actionable takeaway;
+- the verified source bundle and compact cross-platform status.
+
+### Step 7: Generate the digest report
 
 Use `templates/digest.md` as the output structure. Write to:
 
@@ -238,22 +276,45 @@ Use `templates/digest.md` as the output structure. Write to:
 {WORKSPACE}/Builder_Radar_{YYYY-MM-DD}.md
 ```
 
-**Report structure (updated for v3.0):**
+**Report structure (updated for v3.4):**
 
-1. **Executive Summary / 概要** — 2-3 sentences: the single most impactful shipping signal + 3D summary
-2. **Tier 1: Must Read / 必读** — composite ≥7.0. Top 3 items. Each with 3D score bars.
-3. **Tier 2: Worth Knowing / 值得关注** — composite 4.0–6.9. Other shipping signals.
-4. **Tier 3: New Talks / 新 Talk** — YouTube talks ready for `youtube-learning`.
-5. **Heat Radar / 热度雷达** — items with 火爆程度 ≥8 but 重要程度 <7. "Hype check": tell user this is buzzing but may not be actionable.
-6. **Skipped / 过滤记录** — items filtered out, to prove we scanned broadly.
-7. **Tracking Gaps / 信息盲区** — product lines with zero signal.
-8. **Next Steps / 下一步** — concrete actions.
+1. **Executive Summary / 概要** — 2–3 sentences: the most important signal plus the two supporting themes.
+2. **Coverage Note / 扫描说明** — window, candidate count, first-party pages read, organization coverage, and dedup count.
+3. **Tier 1: Must Read / 本周深度必读** — composite ≥7.0, normally top 3. Give the full evidence-and-mechanism treatment; show scores on one compact line.
+4. **Tier 2: Worth Knowing / 值得关注** — composite 4.0–6.9. Use concise analysis cards, not a dense link table.
+5. **Tier 3: New Talks / 新 Talk** — YouTube talks ready for `youtube-learning`; reference rather than repeat a talk already analyzed above.
+6. **Heat Radar / 热度雷达** — items with 火爆程度 ≥8 but 重要程度 <7. "Hype check": tell user this is buzzing but may not be actionable.
+7. **Skipped / 过滤记录** — items filtered out, to prove we scanned broadly.
+8. **Tracking Gaps / 信息盲区** — product lines with zero signal.
+9. **Next Steps / 下一步** — concrete actions.
 
-### Step 7: Present the digest
+### Step 8: Present the digest
 
 Use `present_files` to show the digest. Highlight the top item's 3 scores.
 
 Always end with: "Any of these talks you want me to process with `youtube-learning`?"
+
+## Best-practice invocations
+
+Use the shortest prompt that selects the mode, output location, and any special focus. Do not copy the whole workflow into the task prompt; this Skill owns the workflow and quality bar.
+
+**Recommended daily automation:**
+
+```text
+执行 builder-radar 的 Daily Deep 模式。读取最近 7 份日报去重，完成 24 小时 shipping 扫描和滚动 7 天一手深度扫描，将今天的完整日报保存到 {OUTPUT_DIR}/Builder_Radar_{YYYY-MM-DD}.md，并交付文件与最重要的 3 个发现。
+```
+
+**Fast heat check:**
+
+```text
+执行 builder-radar 的 Quick Heat 模式，检查过去 48 小时最热但可能被高估的 Builder 信号，并给出原始来源。
+```
+
+**Product-line deep dive:**
+
+```text
+执行 builder-radar 的 Product Deep Dive 模式，深挖最近 14 天的 {PRODUCT_LINE}，关联 X、YouTube、官方博客、GitHub 和论文，输出已核验的技术与产品变化。
+```
 
 ## Signal freshness convention
 
@@ -267,6 +328,10 @@ Always end with: "Any of these talks you want me to process with `youtube-learni
 ## Pitfalls
 
 - **Missing source links**: Every Tier 1/2/3 item MUST include a direct URL to the original source. Blog → blog URL. X post → tweet URL. Talk → YouTube URL. This is the #1 user complaint — if they can't click through to read/watch, the radar is worthless.
+- **Snippet-only summaries**: Never write the final item from search-result snippets. Open and read the primary artifact.
+- **Template dominance**: Scores, labels, and source-status text must not outweigh the evidence and builder insight.
+- **Organization monoculture**: A broad daily digest should not become one company's changelog. Enforce diversity unless the news cycle genuinely warrants an exception.
+- **Duplicate events**: Do not analyze a talk in Tier 1 and repeat the same analysis in Tier 3. Reference it once.
 - **Siloed source scanning**: Never report an X signal before checking YouTube and first-party sites for the same event, and never report a YouTube talk before checking X and first-party sites. Merge matching evidence into one item.
 - **Opinion pollution**: Content filter (Step 4) is mandatory. No exceptions.
 - **YouTube upload lag**: Conference talks lag 1–3 weeks after event. "No new talks" ≠ no talks exist.
@@ -278,12 +343,15 @@ Always end with: "Any of these talks you want me to process with `youtube-learni
 
 After generating the digest:
 1. **Links check (MANDATORY)**: For EVERY Tier 1/2 item, verify in this order: (1) YouTube link if it's a talk, (2) author's blog link, (3) X/Twitter link. At least one must be provided. Conference talks MUST have YouTube URL. Tier 3 table MUST have YouTube Link for every row. No URL → fix or demote before presenting.
-2. **Correlation check (MANDATORY)**: For every X-derived item, is the YouTube search result recorded as a matching URL or an explicit not-yet-found note? For every YouTube-derived item, were matching X and first-party sources checked? Are cross-platform matches merged instead of duplicated?
-3. **Content filter**: Every Tier 1 item passed the IN/OUT gate? Remove any opinions.
-4. **3D scores**: Are all three scores justified with evidence (not gut feel)?
-5. **Heat Radar**: Any high-heat/low-importance items flagged for "hype check"?
-6. **Coverage**: Every major product line got at least one search hit?
-7. **Next Steps**: Concrete, executable items?
+2. **Original-source check**: Was every selected primary artifact opened and read? Are dates, claims, and numbers traceable to it rather than a snippet or recap?
+3. **Depth check**: Does every substantive Tier 1 item contain 3–5 concrete facts, experiments, or mechanisms plus an actionable builder takeaway?
+4. **Correlation check (MANDATORY)**: For every X-derived item, is the YouTube search result recorded as a matching URL or an explicit not-yet-found note? For every YouTube-derived item, were matching X and first-party sources checked? Are cross-platform matches merged instead of duplicated?
+5. **Dedup and diversity check**: Were recent reports checked? Is each event presented once? Does the selection avoid unnecessary single-company concentration?
+6. **Content filter**: Every Tier 1 item passed the IN/OUT gate? Remove opinions and unverifiable claims.
+7. **3D scores**: Are all three scores justified with evidence (not gut feel)?
+8. **Heat Radar**: Any high-heat/low-importance items flagged for "hype check"?
+9. **Coverage**: Every major product line got at least one search hit or a documented gap?
+10. **Next Steps**: Concrete, executable items?
 
 ## Builder list maintenance
 

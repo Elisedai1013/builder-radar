@@ -1,125 +1,150 @@
 # 🔭 Builder Radar
 
-> 追踪 29 位 AI 产品 Builder 的 shipping 动态，不做观点二传手。
-> Track what 29 AI product builders SHIP, not what they THINK.
+> 追踪 AI Builder 真正发布或验证了什么，并把一手原文读成可行动的深度日报。
+> Track what AI builders ship or prove, then explain what builders can learn.
 
-[![Version](https://img.shields.io/badge/version-3.3.0-blue)](https://github.com/Elisedai1013/builder-radar)
+[![Version](https://img.shields.io/badge/version-3.4.0-blue)](https://github.com/Elisedai1013/builder-radar)
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
-[![Builders](https://img.shields.io/badge/builders-29-orange)](./builders.json)
-
----
+[![Builders](https://img.shields.io/badge/builders-31-orange)](./builders.json)
 
 ## 这是什么？ / What is this?
 
-AI Builder 圈信息噪音巨大——每天几百条推文、博客、视频，但真正**可操作的产品信号**不到 5%。
+AI Builder 圈每天都有大量 X 帖、博客、论文、Release 和视频。真正困难的不是“找到链接”，而是判断哪些内容值得读、读懂原文的证据链，并把同一事件在 X、YouTube、官方博客、论文和 GitHub 上的材料合并起来。
 
-**Builder Radar** 每天自动扫描 29 位一线 AI Builder 的 X、博客、YouTube，用三维打分体系（实时性 × 重要程度 × 火爆程度）帮你筛出真正值得看的东西。
+Builder Radar 会：
 
-核心原则就一条：
+- 扫描过去 24 小时的产品发布与 shipping 信号；
+- 扫描滚动 7 天的第一方研究、工程博客、论文和 Builder 实战复盘；
+- 打开并精读入选原文，而不是根据搜索摘要写结论；
+- 关联 X ↔ YouTube ↔ 第一方博客/论文/GitHub；
+- 用实时性、重要程度、社区热度三维评分；
+- 输出包含技术机制、实验数据、Builder 启示和直接来源的中文深度日报。
 
-> **只追踪发货，不追踪观点。**
-> 产品发布 > Demo > 技术深潜 > 官方博客 > 验证过的案例 > 大会演讲
-> 跳过：观点、预测、热帖、评论 —— 它们不给你可行动的信息。
->
-> **Track what people SHIP, not what they THINK.**
-> Product launches > demos > technical deep-dives > official blog posts > verified case studies > conference talks
-> Skip: opinions, predictions, hot takes, commentary.
+核心原则：
 
----
+> **Track what people SHIP or PROVE, not what they merely THINK.**
 
-## 它怎么帮你筛信息？ / How does it filter?
+产品发布、真实 Demo、研究与工程深潜、Builder 实验、数据化生产案例和一手 Talk 优先；泛观点、预测、争议、recap 和纯 hype 会被过滤。
 
-### 三维独立打分（v3.0）
+## v3.4：Daily Deep
 
-每条通过内容过滤器的信号，在三个维度上独立评分（0-10），不再用单一公式一刀切：
+`Daily Deep` 是推荐默认模式。它解决了“日报很及时，但像链接目录；评分字段很多，真正的原文洞察太少”的问题。
+
+一轮标准执行会：
+
+1. 对照最近 7 份日报去重；
+2. 完成 24h shipping 扫描与滚动 7 天一手深度扫描；
+3. 在搜索条件允许时先建立至少 15 条候选池；
+4. 精选 5–8 条，并尽量覆盖至少 4 个 Builder/组织；
+5. 为重要条目提取 3–5 个可核验事实、数字、实验或技术机制；
+6. 把评分和跨平台状态压缩呈现，把篇幅留给证据与 Builder 决策。
+
+不足 5 条时宁缺毋滥。没有有效直链、准确日期或事实无法核验的内容不能进入正式推荐。
+
+## 四种运行模式 / Modes
+
+| 模式 | 适合场景 | 默认窗口 |
+|------|----------|----------|
+| **Daily Deep** | 每日深度雷达，推荐默认 | 24h shipping + 7d deep |
+| **Quick Heat** | 快速查看社区正在热议什么 | 48h |
+| **Product Deep Dive** | 深挖 Codex、Claude Code、Replit Agent 等产品线 | 14d |
+| **Talk Discovery** | 找最新大会演讲并准备后续视频学习 | 14d uploads |
+
+## 最佳使用实践 / Best Practices
+
+### 推荐：每日自动任务
+
+任务 Prompt 不需要复制整套规则，只需明确模式、输出位置和交付要求：
+
+```text
+执行 builder-radar 的 Daily Deep 模式。读取最近 7 份日报去重，完成 24 小时 shipping 扫描和滚动 7 天一手深度扫描，将今天的完整日报保存到 {OUTPUT_DIR}/Builder_Radar_{YYYY-MM-DD}.md，并交付文件与最重要的 3 个发现。
+```
+
+推荐频率：每天一次。深度内容使用滚动 7 天窗口并与历史日报去重，因此不需要再创建一条内容重复的“周报任务”。
+
+### 临时检查社区热度
+
+```text
+执行 builder-radar 的 Quick Heat 模式，检查过去 48 小时最热但可能被高估的 Builder 信号，并给出原始来源。
+```
+
+### 深挖一个产品线
+
+```text
+执行 builder-radar 的 Product Deep Dive 模式，深挖最近 14 天的 Codex，关联 X、YouTube、官方博客、GitHub 和论文，输出已核验的技术与产品变化。
+```
+
+### 使用建议
+
+- 把 Daily Deep 的输出放在固定目录，让下一次执行可以读取最近日报并去重。
+- 给 Product Deep Dive 明确产品线，不要同时塞入多个宽泛主题。
+- Talk Discovery 只接受直接 YouTube `watch` 链接；播放列表或二手 recap 不能替代视频。
+- 第三方媒体可用于发现线索和验证热度，但最终结论必须锚定第一方材料。
+- 如果某天没有足够的高价值内容，接受短日报，不要要求 Agent 为了数量补齐。
+
+## 内容质量标准 / Editorial Quality Bar
+
+每条重要内容必须回答：
+
+1. 谁在什么准确日期发布了什么？
+2. 核心结论是什么？
+3. 有哪些具体机制、实验、数字或设计决策支持它？
+4. 为什么会改变 AI Builder 的判断？
+5. 接下来可以采取什么行动？
+6. 原始来源在哪里，其他平台是否有同事件材料？
+
+搜索摘要只能用来发现候选，不能支撑最终分析。
+
+## 三维评分 / Scoring
 
 | 维度 | 权重 | 衡量什么？ |
 |------|------|-----------|
-| **实时性** Freshness | 0.3 | 多久前发生的？≤24h = 10 分，>1 月 = 2 分 |
-| **重要程度** Importance | 0.4 | 对你有实际影响吗？架构重组 10 分，功能更新 5 分 |
-| **火爆程度** Community Heat | 0.3 | 社区在讨论吗？跨 Builder 引用 +3，HackerNews 首页 +2 |
+| **实时性** Freshness | 0.3 | 多久前发生？≤24h = 10，>1 月 = 2 |
+| **重要程度** Importance | 0.4 | 对产品、架构或 Builder 决策的影响 |
+| **火爆程度** Community Heat | 0.3 | 跨 Builder 引用、X/YouTube/HN 和社区复现 |
 
-**为什么重要程度权重最高（0.4）？** 一条火但没营养的 rumor（热度 9，重要性 2）不该排在一条安静但致命的架构变更（热度 3，重要性 10）前面。
-
-### 内容过滤器（打分前强制执行）
-
-```
-✅ IN                                ❌ OUT
-产品发布 / Feature 上线              观点 / 热帖 / 预测
-技术深潜 / 架构文                     评论 thread / 引战帖
-Live Demo / 录屏                     "AI 的未来" 泛泛而谈
-官方博客                             VC 融资公告（非 Builder 工具）
-生产案例（有可验证数据）               招聘帖
-大会演讲（一手产品内容）               纯炒作 / 流量帖
+```text
+综合分 = 0.3 × 实时性 + 0.4 × 重要程度 + 0.3 × 火爆程度
 ```
 
-### 🔥 热度雷达（防跟风）
+火爆程度 ≥8、重要程度 <7 的内容会进入 `Heat Radar`，提醒读者它很热，但未必可行动。
 
-火爆程度 ≥8 但重要程度 <7 的信号会被单独标记为"hype check"——告诉你这东西很火，但未必值得你花时间。
+## 跨平台关联 / Cross-platform Correlation
 
----
+- X 发现发布、Demo 或技术线索后，继续搜索同事件的 YouTube 与第一方文章。
+- YouTube 发现重要 Talk 后，反查演讲者 X、官方博客、论文、讲稿、幻灯片或产品页。
+- 同一事件合并成一个来源包，不按平台重复收录。
+- 未找到匹配内容时只标记“尚未找到/可能尚未上传”，不把无结果误判为不存在。
+- 第一方原文、论文、Release 或代码是证据锚点；Talk 必须有直接 YouTube URL。
 
 ## 覆盖范围 / Coverage
 
-**29 位 Builder**，四个层级：
+当前追踪 **31 位 Builder**：
 
-| Tier | 类型 | 数量 | 代表 Builder |
-|------|------|------|-------------|
-| 🔴 Product Builder | 产品一线 | 19 | Boris Cherny, Thibault Sottiaux, Amjad Masad, Guillermo Rauch, Peter Steinberger |
-| 🟡 Official | 官方账号 | 2 | @ClaudeAI, @GoogleLabs |
-| 🟢 Ecosystem | 生态 | 7 | Garry Tan (YC), Dan Shipper (Every), Simon Willison |
-| 🔵 Observer | 观察者 | 1 | Zara Zhang (follow-builders) |
+| Tier | 数量 | 代表 Builder |
+|------|------|-------------|
+| Product Builder | 21 | Boris Cherny, Thibault Sottiaux, Amjad Masad, Guillermo Rauch, Simon Willison, Armin Ronacher |
+| Official | 2 | Claude, Google Labs |
+| Ecosystem | 7 | Swyx, Dan Shipper, Garry Tan, Matt Turck |
+| Observer | 1 | Andrej Karpathy |
 
-覆盖产品线：**Anthropic · OpenAI · Google · Replit · Vercel · Box · Notion · Roblox**
+同时扫描 Anthropic Research/Engineering、OpenAI、Google、Replit、Vercel、Every、Simon Willison 和 Armin Ronacher 等第一方来源，以及 AI Engineer、Anthropic、OpenAI、Google DeepMind、Figma 等视频频道。
 
-数据来源：基于 [follow-builders](https://github.com/zarazhangrui/follow-builders)，持续维护在 `builders.json`。
+数据源维护在 [`builders.json`](./builders.json)，核心列表源自 [follow-builders](https://github.com/zarazhangrui/follow-builders)，并补充高信号独立技术 Builder。
 
----
+## 输出结构 / Output
 
-## 输出长什么样？ / Sample Output
+1. Executive Summary / 概要
+2. Coverage Note / 扫描说明
+3. Tier 1 / 本周深度必读
+4. Tier 2 / 值得关注
+5. Tier 3 / 新 Talk
+6. Heat Radar / 热度雷达
+7. Skipped / 过滤记录
+8. Tracking Gaps / 信息盲区
+9. Next Steps / 下一步
 
-每天生成的日报包含 8 个板块：
-
-```
-🚨 今日速报         — Breaking news，即时插入
-🏆 Tier 1 必读      — Composite ≥ 7.0，含三维打分条
-🥈 Tier 2 值得关注   — Composite 4.0–6.9
-🧭 Tier 3 新 Talk   — 大会演讲 YouTube 链接（可对接 youtube-learning）
-🔥 Heat Radar       — 火但不一定有用的内容（Hype Check）
-🗑️ 已跳过           — 被过滤器挡掉的内容，证明扫过了
-🔍 Tracking Gaps    — 哪个产品线本周没信号？
-📋 Next Radar       — 下次该盯什么？
-```
-
-每一条 Tier 1/2 内容都附带**三级来源链接**（YouTube → 作者博客 → X 原帖），保证你能点进去看原文。
-
-### 跨平台关联检索（v3.3）
-
-X、YouTube 和官方博客不是三个互不相干的信息流。Builder Radar 会把它们视为同一事件的互证来源：
-
-- X 发现值得关注的发布、Demo 或技术线索后，继续用 Builder、产品、功能和事件关键词搜索对应 YouTube 视频与官方文章。
-- YouTube 发现重要 Talk 后，反向搜索演讲者的 X 发布、官方博客、产品页、讲稿或幻灯片。
-- 匹配内容合并成一条信息，同时提供全部原始链接，避免按平台重复收录。
-- 未找到对应 YouTube 内容时明确标记“可能尚未上传”，不把搜索无结果误判为视频不存在。
-
----
-
-## 工作流概览 / Workflow at a Glance
-
-```
-Step 0: 加载追踪库 + 时间窗口计算
-Step 1: 并行搜索 29 位 Builder 的 shipping 信号
-Step 2: 对 X / YouTube / 官方博客执行双向关联检索并合并同一事件
-Step 3: 收集社区热度信号（跨 Builder 引用、HN、媒体报道）
-Step 4: 搜索新上传的大会演讲（YouTube）并反查 X 与官方来源
-Step 5: 内容过滤器（IN/OUT 门禁）
-Step 6: 三维独立打分
-Step 7: 生成结构化日报并提供下一步行动建议
-```
-
-完整工作流定义见 [SKILL.md](./SKILL.md)。
-
----
+日报模板见 [`templates/digest.md`](./templates/digest.md)。
 
 ## 安装 / Install
 
@@ -127,36 +152,32 @@ Step 7: 生成结构化日报并提供下一步行动建议
 git clone https://github.com/Elisedai1013/builder-radar.git
 ```
 
----
+目录结构：
 
-## 目录结构 / Structure
-
-```
+```text
 builder-radar/
-├── SKILL.md          # 完整工作流定义（287 行，给 Agent 看）
-├── builders.json     # 29 位 Builder 追踪库
+├── SKILL.md
+├── builders.json
 ├── templates/
-│   └── digest.md     # 日报模板
-└── README.md         # 你正在看的这个
+│   └── digest.md
+├── README.md
+└── LICENSE
 ```
-
----
 
 ## 版本 / Version
 
-**v3.3.0** — X ↔ YouTube ↔ 官方博客双向关联检索 + Source Bundle + 3D 独立打分
+**v3.4.0 — Daily Deep + first-party editorial quality**
 
 | 版本 | 关键变更 |
 |------|---------|
+| v3.4.0 | Daily Deep 默认模式；原文精读；候选池、去重与来源多样性；深度内容卡；新增 Simon Willison、Armin Ronacher；最佳调用实践 |
 | v3.3.0 | X、YouTube、官方博客双向关联检索；同一事件合并并记录缺失平台状态 |
-| v3.2.0 | 三级来源链接验证（YouTube → 博客 → X），链接缺失自动降级 |
-| v3.0.0 | 三维独立打分替代单一公式，新增火爆程度维度 + Heat Radar |
-| v2.0.0 | 内容过滤器 + builder 追踪库结构化 |
-| v1.0.0 | 初始版本，基础搜索 + 报告生成 |
+| v3.2.0 | 三级来源链接验证，链接缺失自动降级 |
+| v3.0.0 | 三维评分与 Heat Radar |
+| v2.0.0 | 内容过滤器与 Builder 追踪库 |
+| v1.0.0 | 初始版本 |
 
----
-
-## 许可 / License
+## License
 
 MIT
 

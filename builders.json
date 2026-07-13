@@ -1,7 +1,7 @@
 {
-  "version": "3.0.0",
+  "version": "3.1.0",
   "last_updated": "2026-07-13",
-  "source": "Full 26 from 张咋啦 follow-builders (github.com/zarazhangrui/follow-builders) + content-type filtering",
+  "source": "Core list from 张咋啦 follow-builders (github.com/zarazhangrui/follow-builders), extended with high-signal independent technical builders and content-type filtering",
 
   "content_filter": {
     "description": "We track CONCRETE product information, NOT opinions.",
@@ -249,6 +249,32 @@
       "why": "Defines paradigms (vibe coding, agentic engineering). Track talks and deep posts, skip opinions."
     },
     {
+      "name": "Simon Willison",
+      "company": "Independent",
+      "product": "Datasette / LLM tools",
+      "role": "Independent developer",
+      "tier": "product_builder",
+      "twitter": "simonw",
+      "content_types": ["blog", "github", "x"],
+      "track_for": "Reproducible LLM experiments, coding-agent workflows, evaluations, Datasette and llm tool releases. Skip link-only posts and general commentary.",
+      "search_keywords_en": ["site:simonwillison.net 2026 LLM coding agent experiment", "Simon Willison latest AI engineering post"],
+      "search_keywords_zh": ["Simon Willison LLM 工程 实验 2026"],
+      "why": "Consistently publishes first-party, reproducible AI engineering experiments and ships open-source tools."
+    },
+    {
+      "name": "Armin Ronacher",
+      "company": "Independent",
+      "product": "Developer tools / agent infrastructure",
+      "role": "Engineer",
+      "tier": "product_builder",
+      "twitter": "mitsuhiko",
+      "content_types": ["blog", "github", "x"],
+      "track_for": "Agent harnesses, tool calling, developer infrastructure, model behavior in production, and shipped technical experiments. Skip general opinions without evidence.",
+      "search_keywords_en": ["site:lucumr.pocoo.org 2026 agent tools LLM", "Armin Ronacher latest AI engineering post"],
+      "search_keywords_zh": ["Armin Ronacher Agent 工具调用 工程 2026"],
+      "why": "Long-running developer-tools builder who publishes detailed first-party analysis of model and agent behavior."
+    },
+    {
       "name": "Geoffrey Litt",
       "company": "Notion",
       "product": "Notion AI",
@@ -425,7 +451,9 @@
     {"name": "Google AI Blog", "url": "https://blog.google/technology/ai/", "search": "Google DeepMind Gemini latest 2026"},
     {"name": "Replit Blog", "url": "https://blog.replit.com", "search": "Replit Agent latest 2026"},
     {"name": "Vercel Blog", "url": "https://vercel.com/blog", "search": "Vercel v0 AI latest 2026"},
-    {"name": "Every / Chain of Thought", "url": "https://every.to/chain-of-thought", "search": "Chain of Thought AI builder deep-dive 2026"}
+    {"name": "Every / Chain of Thought", "url": "https://every.to/chain-of-thought", "search": "Chain of Thought AI builder deep-dive 2026"},
+    {"name": "Simon Willison's Weblog", "url": "https://simonwillison.net/", "search": "site:simonwillison.net 2026 LLM agent experiment"},
+    {"name": "Armin Ronacher's Blog", "url": "https://lucumr.pocoo.org/", "search": "site:lucumr.pocoo.org 2026 LLM agent tools"}
   ],
 
   "podcast_sources": [
